@@ -79,7 +79,7 @@ public class IncrementalTokenStream extends CommonTokenStream {
 		Token result = super.LT(k);
 		// Adjust the top of the minimum maximum stack if the position/lookahead amount
 		// changed.
-		if (minMaxStack.size() != 0 && (lastP != p || lastK != k)) {
+		if (!minMaxStack.isEmpty() && (lastP != p || lastK != k) && result != null) {
 			int lastIdx = minMaxStack.size() - 1;
 			Interval stackItem = minMaxStack.get(lastIdx);
 			minMaxStack.set(lastIdx, stackItem.union(Interval.of(result.getTokenIndex(), result.getTokenIndex())));
